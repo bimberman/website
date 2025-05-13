@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -22,11 +25,11 @@ const Navbar = () => {
               className="flex items-center space-x-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center">
                 <img
                   src="/images/headshot.jpg"
                   alt="Ben"
-                  className="w-14 aspect-square rounded-full border-2 border-blue-500"
+                  className="w-12 h-12 rounded-full border-2 border-blue-500"
                 />
               </div>
             </Link>
@@ -48,10 +51,12 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            <ThemeToggle isDark={isDark} onClick={toggleTheme} />
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle isDark={isDark} onClick={toggleTheme} />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"

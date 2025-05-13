@@ -31,8 +31,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <ImageCarousel images={project.previewImages} />
       ) : (
         <div className="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700">
-          {/* Add actual project images later */}
-          <div className="w-full h-48 bg-gray-300 dark:bg-gray-600" />
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
         </div>
       )}
       <div className="p-6 flex flex-col flex-grow">

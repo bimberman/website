@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  image: string;
+  link: string;
+  githubLink: string;
+  isMobileFriendly?: boolean;
+  previewImages?: string[];
+}
+
 const Projects = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -20,13 +31,13 @@ const Projects = () => {
     }
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "PDF Reader",
       description:
-        "A web-based PDF reader that allows users to upload and view PDF files. Features include page navigation, zoom controls, and a clean, intuitive interface.",
-      technologies: ["React", "TypeScript", "PDF.js", "Tailwind CSS"],
-      image: "/pdf-reader.jpg",
+        "A web application that allows users to upload and read PDF files. Features include file upload, PDF rendering, and basic navigation controls.",
+      technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+      image: "/images/project-previews/pdf-reader/initial-screen.png",
       link: "http://192.168.1.79:5253",
       githubLink: "https://github.com/bimberman/pdf-scanner",
       isMobileFriendly: false,
@@ -37,10 +48,28 @@ const Projects = () => {
       ],
     },
     {
+      title: "Portfolio Website",
+      description:
+        "A personal portfolio website built with React and Tailwind CSS. Features a responsive design, dark mode support, and smooth animations.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      image: "/images/project-previews/portfolio/portfolio.jpg",
+      link: "https://bimberman.github.io",
+      githubLink: "https://github.com/bimberman/portfolio",
+    },
+    {
+      title: "Task Manager",
+      description:
+        "A task management application that helps users organize their daily tasks. Features include task creation, editing, deletion, and categorization.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+      image: "/images/project-previews/task-manager/task-manager.jpg",
+      link: "https://task-manager-demo.com",
+      githubLink: "https://github.com/bimberman/task-manager",
+    },
+    {
       title: "Project One",
       description: "A full-stack web application built with React and Node.js",
       technologies: ["React", "Node.js", "MongoDB"],
-      image: "/project1.jpg",
+      image: "/images/project-previews/project-one/project-one.jpg",
       link: "#",
       githubLink: "https://github.com/bimberman/project-one",
     },
@@ -48,7 +77,7 @@ const Projects = () => {
       title: "Project Two",
       description: "An AI-powered data analysis tool",
       technologies: ["Python", "TensorFlow", "FastAPI"],
-      image: "/project2.jpg",
+      image: "/images/project-previews/project-two/project-two.jpg",
       link: "#",
       githubLink: "https://github.com/bimberman/project-two",
     },
@@ -56,7 +85,7 @@ const Projects = () => {
       title: "Project Three",
       description: "A real-time collaboration platform",
       technologies: ["Next.js", "WebSocket", "PostgreSQL"],
-      image: "/project3.jpg",
+      image: "/images/project-previews/project-three/project-three.jpg",
       link: "#",
       githubLink: "https://github.com/bimberman/project-three",
     },

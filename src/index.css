@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --transition-duration: 1000ms;
+}
+
+html {
+  transition: background-color var(--transition-duration) ease-in-out,
+    color var(--transition-duration) ease-in-out;
+}
+
+* {
+  transition: background-color var(--transition-duration) ease-in-out,
+    border-color var(--transition-duration) ease-in-out,
+    color var(--transition-duration) ease-in-out,
+    fill var(--transition-duration) ease-in-out,
+    stroke var(--transition-duration) ease-in-out;
+}
