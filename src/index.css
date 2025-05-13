@@ -1,13 +1,57 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --transition-duration: 1000ms;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Force transitions on all elements that change with theme */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+}
+
+/* Ensure transitions work with Tailwind's dark mode */
+.dark * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+}
+
+/* Specific transitions for different elements */
+.bg-transition {
+  transition: background-color var(--transition-duration)
+    var(--transition-timing) !important;
+}
+
+.text-transition {
+  transition: color var(--transition-duration) var(--transition-timing) !important;
+}
+
+.border-transition {
+  transition: border-color var(--transition-duration) var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on the root elements */
+html,
+body {
+  transition: background-color var(--transition-duration)
+    var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: all var(--transition-duration) var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on icons */
+svg {
+  transition: all var(--transition-duration) var(--transition-timing) !important;
 }
