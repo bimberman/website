@@ -1,8 +1,6 @@
 name: Deploy Portfolio
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
