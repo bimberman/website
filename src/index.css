@@ -4,17 +4,54 @@
 
 :root {
   --transition-duration: 1000ms;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html {
-  transition: background-color var(--transition-duration) ease-in-out,
-    color var(--transition-duration) ease-in-out;
-}
-
+/* Force transitions on all elements that change with theme */
 * {
-  transition: background-color var(--transition-duration) ease-in-out,
-    border-color var(--transition-duration) ease-in-out,
-    color var(--transition-duration) ease-in-out,
-    fill var(--transition-duration) ease-in-out,
-    stroke var(--transition-duration) ease-in-out;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+}
+
+/* Ensure transitions work with Tailwind's dark mode */
+.dark * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+}
+
+/* Specific transitions for different elements */
+.bg-transition {
+  transition: background-color var(--transition-duration)
+    var(--transition-timing) !important;
+}
+
+.text-transition {
+  transition: color var(--transition-duration) var(--transition-timing) !important;
+}
+
+.border-transition {
+  transition: border-color var(--transition-duration) var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on the root elements */
+html,
+body {
+  transition: background-color var(--transition-duration)
+    var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: all var(--transition-duration) var(--transition-timing) !important;
+}
+
+/* Ensure transitions work on icons */
+svg {
+  transition: all var(--transition-duration) var(--transition-timing) !important;
 }

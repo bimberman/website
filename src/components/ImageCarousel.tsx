@@ -37,7 +37,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-t-lg">
+      <div className="relative w-full h-full bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-t-lg">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -51,26 +51,29 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
         <img
           src={images[currentIndex]}
           alt="Project preview"
-          className={`w-full h-full object-contain transition-opacity duration-500 ${
+          className={`w-full h-full object-cover transition-opacity duration-500 ${
             isLoading ? "opacity-0" : "opacity-100"
           }`}
           onLoad={handleImageLoad}
           onError={handleImageError}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
-      </div>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/30 px-3 py-1.5 rounded-full">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleDotClick(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? "bg-white scale-125"
-                : "bg-white/50 hover:bg-white/75"
-            }`}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/60 px-3 py-1.5 rounded-full">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleDotClick(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "bg-white scale-125"
+                  : "bg-white/50 hover:bg-white/75"
+              }`}
+              aria-label={`Go to image ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

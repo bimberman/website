@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-
-interface Project {
-  title: string;
-  description: string;
-  technologies: string[];
-  image: string;
-  link: string;
-  githubLink: string;
-  isMobileFriendly?: boolean;
-  previewImages?: string[];
-}
+import { projects } from "../data/projects";
 
 const Projects = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -30,66 +20,6 @@ const Projects = () => {
       handleClosePreview();
     }
   };
-
-  const projects: Project[] = [
-    {
-      title: "PDF Reader",
-      description:
-        "A web application that allows users to upload and read PDF files. Features include file upload, PDF rendering, and basic navigation controls.",
-      technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-      image: "/images/project-previews/pdf-reader/initial-screen.png",
-      link: "http://192.168.1.79:5253",
-      githubLink: "https://github.com/bimberman/pdf-scanner",
-      isMobileFriendly: false,
-      previewImages: [
-        "/images/project-previews/pdf-reader/initial-screen.png",
-        "/images/project-previews/pdf-reader/upload-documents.png",
-        "/images/project-previews/pdf-reader/preview-documents.png",
-      ],
-    },
-    {
-      title: "Portfolio Website",
-      description:
-        "A personal portfolio website built with React and Tailwind CSS. Features a responsive design, dark mode support, and smooth animations.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-      image: "/images/project-previews/portfolio/portfolio.jpg",
-      link: "https://bimberman.github.io",
-      githubLink: "https://github.com/bimberman/portfolio",
-    },
-    {
-      title: "Task Manager",
-      description:
-        "A task management application that helps users organize their daily tasks. Features include task creation, editing, deletion, and categorization.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-      image: "/images/project-previews/task-manager/task-manager.jpg",
-      link: "https://task-manager-demo.com",
-      githubLink: "https://github.com/bimberman/task-manager",
-    },
-    {
-      title: "Project One",
-      description: "A full-stack web application built with React and Node.js",
-      technologies: ["React", "Node.js", "MongoDB"],
-      image: "/images/project-previews/project-one/project-one.jpg",
-      link: "#",
-      githubLink: "https://github.com/bimberman/project-one",
-    },
-    {
-      title: "Project Two",
-      description: "An AI-powered data analysis tool",
-      technologies: ["Python", "TensorFlow", "FastAPI"],
-      image: "/images/project-previews/project-two/project-two.jpg",
-      link: "#",
-      githubLink: "https://github.com/bimberman/project-two",
-    },
-    {
-      title: "Project Three",
-      description: "A real-time collaboration platform",
-      technologies: ["Next.js", "WebSocket", "PostgreSQL"],
-      image: "/images/project-previews/project-three/project-three.jpg",
-      link: "#",
-      githubLink: "https://github.com/bimberman/project-three",
-    },
-  ];
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-900">
