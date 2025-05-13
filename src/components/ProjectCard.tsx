@@ -1,4 +1,3 @@
-import React from "react";
 import { Project } from "../data/projects";
 import { ProjectIcons } from "../data/projectIcons";
 import GithubIcon from "../assets/icons/GithubIcon";

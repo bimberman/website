@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "../context/ThemeContext";
@@ -6,7 +6,7 @@ import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { isDark, toggleTheme } = useTheme();
+  useTheme(); // Only to trigger re-render on theme change
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -51,12 +51,12 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <ThemeToggle isDark={isDark} onClick={toggleTheme} />
+            <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <ThemeToggle isDark={isDark} onClick={toggleTheme} />
+            <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"

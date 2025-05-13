@@ -1,5 +1,3 @@
-import React from "react";
-
 const SunIcon: React.FC = () => {
   return (
     <svg

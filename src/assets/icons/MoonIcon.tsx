@@ -1,6 +1,4 @@
-import React from "react";
-
-const MoonIcon: React.FC = () => {
+const MoonIcon = () => {
   return (
     <svg
       className="w-5 h-5"
