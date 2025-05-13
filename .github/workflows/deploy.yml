@@ -3,7 +3,8 @@ name: Deploy Portfolio
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  pull_request:
+    branches: [main]
 
 env:
   AWS_REGION: us-east-1
@@ -48,12 +49,33 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters "commands=[
               'echo \"Starting deployment...\"',
-              'aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}',
-              'docker pull ${{ steps.build-image.outputs.image }}',
+              'echo \"Verifying AWS CLI...\"',
+              'aws --version',
+              'echo \"Verifying Docker...\"',
+              'docker --version',
+              'echo \"Current Docker images:\"',
+              'docker images',
+              'echo \"Logging into ECR...\"',
+              'aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }} || { echo \"ECR login failed\"; exit 1; }',
+              'echo \"Verifying ECR access...\"',
+              'aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY }} || { echo \"ECR repository access failed\"; exit 1; }',
+              'echo \"Listing available images in repository...\"',
+              'aws ecr list-images --repository-name ${{ env.ECR_REPOSITORY }} || { echo \"Failed to list images\"; exit 1; }',
+              'echo \"Pulling image...\"',
+              'docker pull ${{ steps.build-image.outputs.image }} || { echo \"Image pull failed\"; docker images; exit 1; }',
+              'echo \"Stopping existing container...\"',
               'docker stop portfolio || true',
               'docker rm portfolio || true',
-              'docker run -d --name portfolio --restart unless-stopped -p 80:80 ${{ steps.build-image.outputs.image }}',
-              'docker ps -a'
+              'echo \"Starting new container...\"',
+              'docker run -d --name portfolio --restart unless-stopped -p 80:80 ${{ steps.build-image.outputs.image }} || { echo \"Container start failed\"; exit 1; }',
+              'echo \"Waiting for container to start...\"',
+              'sleep 10',
+              'echo \"Checking container status...\"',
+              'docker ps -a',
+              'echo \"Checking container logs...\"',
+              'docker logs portfolio',
+              'echo \"Testing container health...\"',
+              'curl -I http://localhost:80 || echo \"Container is running but service might not be ready yet\"'
             ]" \
             --output-s3-bucket-name ${{ secrets.S3_BUCKET_NAME }} \
             --output-s3-key-prefix "deploy-logs" \
