@@ -1,14 +1,16 @@
 import { ProjectIconType } from "./projectIcons";
+import env from "../config/env";
 
 export interface Project {
     title: string;
     description: string;
     technologies: string[];
     image: string;
-    link: string;
+    subdomain: string;
     githubLink: string;
     icons?: ProjectIconType[];
     previewImages?: string[];
+    port: number;
 }
 
 export const projects: Project[] = [
@@ -27,13 +29,14 @@ export const projects: Project[] = [
             "GitHub Actions",
         ],
         image: "/images/project-previews/pdf-reader/initial-screen.png",
-        link: "http://192.168.1.79:5253",
-        githubLink: "https://github.com/bimberman/pdf-scanner",
+        subdomain: "pdf",
+        githubLink: "https://github.com/bimberman/pdf-reader",
         icons: ["MOBILE_NOT_SUPPORTED"],
         previewImages: [
             "/images/project-previews/pdf-reader/initial-screen.png",
             "/images/project-previews/pdf-reader/upload-documents.png",
             "/images/project-previews/pdf-reader/preview-documents.png",
         ],
+        port: 5253,
     },
 ];
