@@ -6,14 +6,14 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with verbose output
+RUN npm ci --verbose
 
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the application with error output
+RUN npm run build || (echo "Build failed" && exit 1)
 
 # Production stage
 FROM nginx:alpine
