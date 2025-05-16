@@ -1,5 +1,4 @@
 import { ProjectIconType } from "./projectIcons";
-import env from "../config/env";
 
 export interface Project {
     title: string;
