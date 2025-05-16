@@ -9,7 +9,7 @@ export default defineConfig({
   },
   define: {
     "process.env.VITE_API_URL": JSON.stringify(
-      process.env.VITE_API_URL || "http://localhost:5173" // Using port 5253 to match the PDF Reader project port from projects.ts
+      process.env.VITE_API_URL || "http://localhost:5173" // Using Vite's default port
     ),
     "process.env.VITE_ENV": JSON.stringify(
       process.env.VITE_ENV || "development"
