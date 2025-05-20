@@ -18,15 +18,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const isDark = document.documentElement.classList.contains("dark");
   const projectLink = env.getProjectUrl(project.subdomain, project.port);
 
-  // In production, we want to show the preview in a new tab
-  const handlePreviewClick = (e: React.MouseEvent) => {
-    if (env.isProduction) {
-      window.open(projectLink, "_blank");
-    } else {
-      onPreviewClick(e, projectLink);
-    }
-  };
-
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col h-full">
       <div className="relative">
@@ -86,11 +77,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </h3>
           <div className="flex justify-center gap-4">
             <button
-              onClick={handlePreviewClick}
+              onClick={(e) => onPreviewClick(e, projectLink)}
               className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
-              title={
-                env.isProduction ? "Open Project in New Tab" : "Preview Project"
-              }
+              title="Preview Project"
             >
               <PreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </button>
