@@ -1,1 +1,0 @@
-{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["ecr:InitiateLayerUpload","ecr:UploadLayerPart","ecr:CompleteLayerUpload","ecr:PutImage"],"Resource":"arn:aws:ecr:us-east-1:111186149507:repository/portfolio"}]}
