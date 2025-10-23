@@ -1,7 +1,13 @@
-const MoonIcon = () => {
+import React from "react";
+
+interface IconProps {
+  className?: string;
+}
+
+const MoonIcon: React.FC<IconProps> = ({ className = "w-5 h-5" }) => {
   return (
     <svg
-      className="w-5 h-5"
+      className={className}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

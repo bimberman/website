@@ -1,39 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/projects";
 
 const Projects = () => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   const handlePreviewClick = (e: React.MouseEvent, url: string) => {
     e.preventDefault();
-    setPreviewUrl(url);
+    setSelectedProject(url);
   };
 
   const handleClosePreview = () => {
-    setPreviewUrl(null);
-  };
-
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    // Only close if clicking the overlay itself, not its children
-    if (e.target === e.currentTarget) {
-      handleClosePreview();
-    }
+    setSelectedProject(null);
   };
 
   return (
-    <section id="projects" className="py-20 bg-white dark:bg-gray-900">
+    <main className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+        <header className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             My Projects
-          </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Here are some of the projects I've worked on
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            A collection of my recent work and personal projects
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard
               key={project.title}
@@ -41,23 +34,18 @@ const Projects = () => {
               onPreviewClick={handlePreviewClick}
             />
           ))}
-        </div>
-      </div>
+        </section>
 
-      {/* Preview Modal */}
-      {previewUrl && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={handleOverlayClick}
-        >
-          <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-6xl h-[80vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Project Preview
-              </h3>
+        {selectedProject && (
+          <aside
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+            onClick={handleClosePreview}
+          >
+            <div className="relative w-full h-full max-w-4xl max-h-[90vh] m-4">
               <button
+                className="absolute top-4 right-4 text-white hover:text-gray-300"
                 onClick={handleClosePreview}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                aria-label="Close preview"
               >
                 <svg
                   className="w-6 h-6"
@@ -73,18 +61,17 @@ const Projects = () => {
                   />
                 </svg>
               </button>
-            </div>
-            <div className="flex-grow">
               <iframe
-                src={previewUrl}
-                className="w-full h-full rounded-b-lg"
+                src={selectedProject}
+                className="w-full h-full rounded-lg"
                 title="Project Preview"
+                loading="lazy"
               />
             </div>
-          </div>
-        </div>
-      )}
-    </section>
+          </aside>
+        )}
+      </div>
+    </main>
   );
 };
 
