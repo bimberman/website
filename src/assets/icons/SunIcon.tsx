@@ -1,7 +1,13 @@
-const SunIcon: React.FC = () => {
+import React from "react";
+
+interface IconProps {
+  className?: string;
+}
+
+const SunIcon: React.FC<IconProps> = ({ className = "w-5 h-5" }) => {
   return (
     <svg
-      className="w-5 h-5"
+      className={className}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

@@ -1,84 +1,98 @@
+import { FaReact, FaNodeJs, FaPython, FaAws } from "react-icons/fa";
+import { SiTypescript, SiMongodb, SiPostgresql } from "react-icons/si";
+
 const About = () => {
+  const backgroundContent = {
+    paragraphs: [
+      "I'm a full-stack developer with a strong foundation in modern web technologies. My journey in software development has been driven by a constant desire to learn and create meaningful applications that solve real-world problems.",
+      "With experience in both frontend and backend development, I enjoy the challenge of building scalable and maintainable applications that provide great user experiences.",
+    ],
+  };
+
+  const experienceContent = {
+    paragraphs: [
+      "Throughout my career, I've worked on various projects ranging from small business websites to complex web applications. I've collaborated with teams to deliver high-quality solutions while maintaining clean code and following best practices.",
+      "I'm always eager to take on new challenges and learn new technologies to stay at the forefront of web development.",
+    ],
+  };
+
+  const skills = [
+    { name: "React", icon: FaReact, color: "text-blue-500" },
+    { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
+    { name: "Node.js", icon: FaNodeJs, color: "text-green-500" },
+    { name: "Python", icon: FaPython, color: "text-yellow-500" },
+    { name: "MongoDB", icon: SiMongodb, color: "text-green-600" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-400" },
+    { name: "AWS", icon: FaAws, color: "text-orange-500" },
+  ];
+
   return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-900">
+    <main className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+        <header className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             About Me
-          </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            Get to know more about my background and skills
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            Full Stack Developer passionate about building modern web
+            applications
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-              My Journey
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              I'm a passionate full-stack developer with a strong foundation in
-              modern web technologies. My journey in software development has
-              been driven by a constant desire to learn and create meaningful
-              applications that solve real-world problems.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300">
-              I specialize in building responsive, user-friendly web
-              applications using React, TypeScript, and Node.js. My approach
-              combines technical expertise with a keen eye for design and user
-              experience.
-            </p>
-          </div>
+        <article className="max-w-3xl mx-auto">
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Background
+            </h2>
+            {backgroundContent.paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-gray-600 dark:text-gray-300 ${
+                  index === 0 ? "mb-4" : ""
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </section>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Frontend
-              </h4>
-              <ul className="text-gray-600 dark:text-gray-300 space-y-2">
-                <li>React & TypeScript</li>
-                <li>Tailwind CSS</li>
-                <li>Next.js</li>
-                <li>Redux</li>
-              </ul>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Backend
-              </h4>
-              <ul className="text-gray-600 dark:text-gray-300 space-y-2">
-                <li>Node.js</li>
-                <li>Express</li>
-                <li>MongoDB</li>
-                <li>PostgreSQL</li>
-              </ul>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Tools
-              </h4>
-              <ul className="text-gray-600 dark:text-gray-300 space-y-2">
-                <li>Git & GitHub</li>
-                <li>Docker</li>
-                <li>AWS</li>
-                <li>CI/CD</li>
-              </ul>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Soft Skills
-              </h4>
-              <ul className="text-gray-600 dark:text-gray-300 space-y-2">
-                <li>Problem Solving</li>
-                <li>Team Collaboration</li>
-                <li>Communication</li>
-                <li>Agile Methodologies</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Skills
+            </h2>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {skills.map((skill) => (
+                <li
+                  key={skill.name}
+                  className="flex items-center space-x-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                  <skill.icon className={`text-2xl ${skill.color}`} />
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {skill.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Experience
+            </h2>
+            {experienceContent.paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-gray-600 dark:text-gray-300 ${
+                  index === 0 ? "mb-4" : ""
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </section>
+        </article>
       </div>
-    </section>
+    </main>
   );
 };
 

@@ -36,21 +36,34 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <figure
+      className={`relative ${className}`}
+      role="region"
+      aria-label="Image carousel"
+    >
       <div className="relative w-full h-full bg-gray-200 dark:bg-gray-700 overflow-hidden rounded-t-lg">
         {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            role="status"
+          >
+            <div
+              className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+              aria-label="Loading image"
+            ></div>
           </div>
         )}
         {error && (
-          <div className="absolute inset-0 flex items-center justify-center text-red-500">
+          <div
+            className="absolute inset-0 flex items-center justify-center text-red-500"
+            role="alert"
+          >
             {error}
           </div>
         )}
         <img
           src={images[currentIndex]}
-          alt="Project preview"
+          alt={`Project preview ${currentIndex + 1} of ${images.length}`}
           className={`w-full h-full object-cover transition-opacity duration-500 ${
             isLoading ? "opacity-0" : "opacity-100"
           }`}
@@ -60,7 +73,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           decoding="async"
           fetchPriority="high"
         />
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/60 px-3 py-1.5 rounded-full">
+        <nav
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/60 px-3 py-1.5 rounded-full"
+          aria-label="Carousel navigation"
+        >
           {images.map((_, index) => (
             <button
               key={index}
@@ -71,11 +87,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                   : "bg-white/50 hover:bg-white/75"
               }`}
               aria-label={`Go to image ${index + 1}`}
+              aria-current={index === currentIndex ? "true" : "false"}
             />
           ))}
-        </div>
+        </nav>
       </div>
-    </div>
+    </figure>
   );
 };
 
