@@ -20,7 +20,7 @@ const Navbar = () => {
   const activeLinkStyles = "font-bold underline underline-offset-4";
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-md rounded-full shadow-lg border border-gray-200/50 dark:border-gray-800/50">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-full shadow-lg border border-gray-200/50 dark:border-gray-800/50 z-[100]">
       <header className="flex justify-between items-center h-16 px-6">
         <figure className="w-10">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -81,7 +81,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <menu className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-800/50">
+        <menu className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-800/50 z-[110]">
           <ul className="p-4 space-y-2">
             {navItems.map((item) => (
               <li key={item.name}>

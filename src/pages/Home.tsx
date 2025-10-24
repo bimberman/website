@@ -1,6 +1,23 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import ProjectCard from "../components/ProjectCard";
+import { projects } from "../data/projects";
+import ScrollDownArrow from "../assets/icons/ScrollDownArrow";
 
 const Home = () => {
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+  const handlePreviewClick = (e: React.MouseEvent, url: string) => {
+    e.preventDefault();
+    setSelectedProject(url);
+  };
+
+  const handleClosePreview = () => {
+    setSelectedProject(null);
+  };
+
+  // Get featured projects
+  const featuredProjects = projects.filter(project => project.featured);
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
@@ -28,35 +45,10 @@ const Home = () => {
             </Link>
           </nav>
         </header>
-      </section>
-
-      {/* About Preview Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <header className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-              About Me
-            </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              Get to know more about my background and skills
-            </p>
-          </header>
-          <article className="max-w-3xl mx-auto text-center">
-            <p className="text-gray-600 dark:text-gray-300 mb-8">
-              I'm a passionate full-stack developer with a strong foundation in
-              modern web technologies. My journey in software development has
-              been driven by a constant desire to learn and create meaningful
-              applications that solve real-world problems.
-            </p>
-            <nav>
-              <Link
-                to="/about"
-                className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Learn More
-              </Link>
-            </nav>
-          </article>
+        
+        {/* Scroll Down Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <ScrollDownArrow />
         </div>
       </section>
 
@@ -71,23 +63,64 @@ const Home = () => {
               Check out some of my recent work
             </p>
           </header>
-          <article className="max-w-3xl mx-auto text-center">
-            <p className="text-gray-600 dark:text-gray-300 mb-8">
-              I've worked on various projects ranging from web applications to
-              mobile apps. Each project has helped me grow as a developer and
-              learn new technologies.
-            </p>
-            <nav>
-              <Link
-                to="/projects"
-                className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                View All Projects
-              </Link>
-            </nav>
-          </article>
+          
+          {/* Featured Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                onPreviewClick={handlePreviewClick}
+              />
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Link
+              to="/projects"
+              className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              View All Projects
+            </Link>
+          </div>
         </div>
       </section>
+
+      {/* Project Preview Modal */}
+      {selectedProject && (
+        <aside
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={handleClosePreview}
+        >
+          <div className="relative w-full h-full max-w-4xl max-h-[90vh] m-4">
+            <button
+              className="absolute top-4 right-4 text-white hover:text-gray-300"
+              onClick={handleClosePreview}
+              aria-label="Close preview"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <iframe
+              src={selectedProject}
+              className="w-full h-full rounded-lg"
+              title="Project Preview"
+              loading="lazy"
+            />
+          </div>
+        </aside>
+      )}
     </main>
   );
 };

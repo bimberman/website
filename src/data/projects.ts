@@ -9,6 +9,10 @@ export interface Project {
     githubLink?: string;
     icons?: ProjectIconType[];
     previewImages?: string[];
+    featured?: boolean;
+    featuredOrder?: number;
+    order?: number;
+    dateAdded?: string; // ISO date string
 }
 
 export const projects: Project[] = [
@@ -35,6 +39,10 @@ export const projects: Project[] = [
             "/images/project-previews/pdf-reader/preview-documents.png",
         ],
         url: "http://localhost:5253",
+        featured: true,
+        featuredOrder: 1,
+        order: 1,
+        dateAdded: "2024-01-15",
     },
     {
         title: "Larry's USA Adventure",
@@ -54,6 +62,9 @@ export const projects: Project[] = [
             "/images/project-previews/travel-blog/blog-posts.png",
         ],
         url: "https://bimberman.wixsite.com/larrysblog",
+        featured: false,
+        order: 1,
+        dateAdded: "2019-06-01",
     },
     {
         title: "Employee Management",
@@ -74,5 +85,9 @@ export const projects: Project[] = [
             "/images/project-previews/employee-management/main-screen.png",
         ],
         url: "https://employee-management.bimberman.com",
+        featured: true,
+        featuredOrder: 2,
+        order: 1,
+        dateAdded: "2023-11-20",
     },
 ];
