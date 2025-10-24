@@ -1,6 +1,7 @@
 import MobileNotSupported from "../assets/icons/MobileNotSupported";
 import DockerIcon from "../assets/icons/DockerIcon";
 import CiCdIcon from "../assets/icons/CiCdIcon";
+import NoPreviewIcon from "../assets/icons/NoPreviewIcon";
 
 export interface ProjectIcon {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -19,6 +20,10 @@ export const ProjectIcons = {
     CI_CD: {
         icon: CiCdIcon,
         description: "CI/CD pipeline implemented",
+    },
+    NO_PREVIEW: {
+        icon: NoPreviewIcon,
+        description: "Preview not available - requires full page",
     },
 } as const;
 

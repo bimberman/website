@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 interface ImageCarouselProps {
   images: string[];
@@ -13,6 +13,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Simple timer for carousel rotation
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -71,7 +72,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           onError={handleImageError}
           loading="eager"
           decoding="async"
-          fetchPriority="high"
         />
         <nav
           className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black/60 px-3 py-1.5 rounded-full"

@@ -3,8 +3,8 @@ import { ProjectIcons } from "../data/projectIcons";
 import GithubIcon from "../assets/icons/GithubIcon";
 import ExternalLinkIcon from "../assets/icons/ExternalLinkIcon";
 import PreviewIcon from "../assets/icons/PreviewIcon";
+import NoPreviewIcon from "../assets/icons/NoPreviewIcon";
 import ImageCarousel from "./ImageCarousel";
-import env from "../config/env";
 
 interface ProjectCardProps {
   project: Project;
@@ -16,7 +16,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   onPreviewClick,
 }) => {
   const isDark = document.documentElement.classList.contains("dark");
-  const projectLink = env.getProjectUrl(project.subdomain, project.port);
+  const hasNoPreview = project.icons?.includes("NO_PREVIEW");
 
   return (
     <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col h-full">
@@ -32,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
       </figure>
       <section className="p-6 flex flex-col flex-grow">
-        <header className="flex items-center gap-3 mb-2">
+        <header className="flex items-center justify-between mb-2">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             {project.title}
           </h3>
@@ -61,6 +61,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           {project.description}
         </p>
+        <div className="flex-grow"></div>
         <ul
           className="flex flex-wrap gap-2 mb-4"
           aria-label="Technologies used"
@@ -74,20 +75,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </li>
           ))}
         </ul>
-        <footer className="flex flex-col gap-4 mt-auto">
+        <footer className="flex flex-col gap-4">
           <h3 className="text-lg font-bold text-gray-900 dark:text-white text-center">
             View Project
           </h3>
           <nav className="flex justify-center gap-4" aria-label="Project links">
             <button
-              onClick={(e) => onPreviewClick(e, projectLink)}
-              className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
-              title="Preview Project"
+              onClick={(e) => onPreviewClick(e, project.url)}
+              disabled={hasNoPreview}
+              className={`p-2 rounded-full transition-colors ${
+                hasNoPreview
+                  ? "bg-gray-50 dark:bg-gray-600 cursor-not-allowed opacity-50"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+              }`}
+              title={hasNoPreview ? "Preview not available" : "Preview Project"}
             >
-              <PreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              {hasNoPreview ? (
+                <NoPreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              ) : (
+                <PreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              )}
             </button>
             <a
-              href={projectLink}
+              href={project.url}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"

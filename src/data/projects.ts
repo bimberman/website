@@ -5,6 +5,7 @@ export interface Project {
     description: string;
     technologies: string[];
     image: string;
+    url: string;
     githubLink: string;
     icons?: ProjectIconType[];
     previewImages?: string[];
@@ -32,9 +33,11 @@ export const projects: Project[] = [
             "/images/project-previews/pdf-reader/initial-screen.png",
             "/images/project-previews/pdf-reader/upload-documents.png",
             "/images/project-previews/pdf-reader/preview-documents.png",
-        ]    },
+        ],
+        url: "http://localhost:5253",
+    },
     {
-        title: "Larry's Overland USA Adventure",
+        title: "Larry's USA Adventure",
         description:
             "A personal travel blog documenting a cross-country road trip adventure across the United States in 2019. Features daily posts, photos, and stories from various destinations including national parks, landmarks, and scenic routes.",
         technologies: [
@@ -46,10 +49,11 @@ export const projects: Project[] = [
         ],
         image: "/images/project-previews/travel-blog/homepage.png",
         githubLink: "https://bimberman.wixsite.com/larrysblog",
-        icons: [],
+        icons: ["NO_PREVIEW"],
         previewImages: [
             "/images/project-previews/travel-blog/homepage.png",
             "/images/project-previews/travel-blog/blog-posts.png",
-            "/images/project-previews/travel-blog/about.png",
-        ]    },
+        ],
+        url: "https://bimberman.wixsite.com/larrysblog",
+    },
 ];
