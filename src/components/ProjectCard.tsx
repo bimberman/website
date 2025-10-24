@@ -4,6 +4,7 @@ import GithubIcon from "../assets/icons/GithubIcon";
 import ExternalLinkIcon from "../assets/icons/ExternalLinkIcon";
 import PreviewIcon from "../assets/icons/PreviewIcon";
 import NoPreviewIcon from "../assets/icons/NoPreviewIcon";
+import NoGithubIcon from "../assets/icons/NoGithubIcon";
 import ImageCarousel from "./ImageCarousel";
 
 interface ProjectCardProps {
@@ -17,6 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const isDark = document.documentElement.classList.contains("dark");
   const hasNoPreview = project.icons?.includes("NO_PREVIEW");
+  const hasNoGithub = project.icons?.includes("NO_GITHUB");
 
   return (
     <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col h-full">
@@ -91,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               title={hasNoPreview ? "Preview not available" : "Preview Project"}
             >
               {hasNoPreview ? (
-                <NoPreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                <NoPreviewIcon className="w-5 h-5" />
               ) : (
                 <PreviewIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               )}
@@ -105,15 +107,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             >
               <ExternalLinkIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </a>
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
-              title="View Source Code"
-            >
-              <GithubIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-            </a>
+            {hasNoGithub ? (
+              <button
+                disabled
+                className="p-2 bg-gray-50 dark:bg-gray-600 rounded-full cursor-not-allowed opacity-50"
+                title="Source code not available"
+              >
+                <NoGithubIcon className="w-5 h-5" />
+              </button>
+            ) : (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
+                title="View Source Code"
+              >
+                <GithubIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              </a>
+            )}
           </nav>
         </footer>
       </section>

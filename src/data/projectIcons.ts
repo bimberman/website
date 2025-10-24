@@ -2,6 +2,7 @@ import MobileNotSupported from "../assets/icons/MobileNotSupported";
 import DockerIcon from "../assets/icons/DockerIcon";
 import CiCdIcon from "../assets/icons/CiCdIcon";
 import NoPreviewIcon from "../assets/icons/NoPreviewIcon";
+import NoGithubIcon from "../assets/icons/NoGithubIcon";
 
 export interface ProjectIcon {
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -24,6 +25,10 @@ export const ProjectIcons = {
     NO_PREVIEW: {
         icon: NoPreviewIcon,
         description: "Preview not available - requires full page",
+    },
+    NO_GITHUB: {
+        icon: NoGithubIcon,
+        description: "Source code not available on GitHub",
     },
 } as const;
 

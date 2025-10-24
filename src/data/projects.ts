@@ -6,7 +6,7 @@ export interface Project {
     technologies: string[];
     image: string;
     url: string;
-    githubLink: string;
+    githubLink?: string;
     icons?: ProjectIconType[];
     previewImages?: string[];
 }
@@ -48,12 +48,31 @@ export const projects: Project[] = [
             "Responsive Design",
         ],
         image: "/images/project-previews/travel-blog/homepage.png",
-        githubLink: "https://bimberman.wixsite.com/larrysblog",
-        icons: ["NO_PREVIEW"],
+        icons: ["NO_PREVIEW","NO_GITHUB"],
         previewImages: [
             "/images/project-previews/travel-blog/homepage.png",
             "/images/project-previews/travel-blog/blog-posts.png",
         ],
         url: "https://bimberman.wixsite.com/larrysblog",
+    },
+    {
+        title: "Employee Management",
+        description:
+            "A full-stack Employee Management System built with JS, Node, and PostgreSQL. Deployed on an AWS EC2 instance featuring secure CRUD operations and a responsive, user-friendly interface.",
+        technologies: [
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "PostgreSQL",
+            "Node.js",
+            "AWS",
+            "Nginx",
+        ],
+        image: "/images/project-previews/employee-management/initial-screen.png",
+        githubLink: "https://github.com/bimberman/employee-management",
+        previewImages: [
+            "public/images/project-previews/employee-management/main-screen.png",
+        ],
+        url: "https://employee-management.bimberman.com",
     },
 ];
