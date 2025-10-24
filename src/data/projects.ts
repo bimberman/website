@@ -68,10 +68,10 @@ export const projects: Project[] = [
             "AWS",
             "Nginx",
         ],
-        image: "/images/project-previews/employee-management/initial-screen.png",
+        image: "/images/project-previews/employee-management/main-screen.png",
         githubLink: "https://github.com/bimberman/employee-management",
         previewImages: [
-            "public/images/project-previews/employee-management/main-screen.png",
+            "/images/project-previews/employee-management/main-screen.png",
         ],
         url: "https://employee-management.bimberman.com",
     },
