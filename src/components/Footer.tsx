@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <section className="text-center md:text-left mb-4 md:mb-0">
             <p className="text-gray-600 dark:text-gray-300">
-              © {currentYear} Ben. All rights reserved.
+              {/* © {currentYear} Ben. All rights reserved. */}
             </p>
           </section>
           <nav className="flex gap-6" aria-label="Social media links">
