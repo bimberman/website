@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -6,6 +6,7 @@ import * as THREE from 'three';
 interface Scrollable3DModelProps {
   modelPath: string;
   className?: string;
+  scrollProgress?: number;
   startPosition?: {
     rotation: { x: number; y: number; z: number };
     scale: number;
@@ -107,39 +108,12 @@ function Model({
 const Scrollable3DModel: React.FC<Scrollable3DModelProps> = ({ 
   modelPath, 
   className = "w-full h-screen",
+  scrollProgress = 0,
   startPosition,
   endPosition,
   showDebugInfo = false
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Get total scroll position
-      const scrollY = window.pageYOffset;
-      
-      // Calculate rotation based on scroll position
-      // Each full rotation (2π) happens every 1000px of scroll
-      const rotationSpeed = 0.001; // Adjust this to make rotation faster/slower
-      const rotation = scrollY * rotationSpeed; // Infinite rotation
-      
-      // For progress bar, show total scroll progress (0 to 1)
-      // This will show progress through the entire scrollable content
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.min(scrollY / maxScroll, 1);
-      
-      setScrollProgress(progress);
-    };
-
-    // Add scroll listener with passive: false to ensure it works
-    window.addEventListener('scroll', handleScroll, { passive: false });
-    handleScroll(); // Initial call
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <div ref={containerRef} className={className}>
