@@ -38,7 +38,7 @@ export const projects: Project[] = [
             "/images/project-previews/pdf-reader/upload-documents.png",
             "/images/project-previews/pdf-reader/preview-documents.png",
         ],
-        url: "http://localhost:5253",
+        url: "https://pdf.benimberman.com",
         featured: true,
         featuredOrder: 1,
         order: 1,
@@ -84,7 +84,7 @@ export const projects: Project[] = [
         previewImages: [
             "/images/project-previews/employee-management/main-screen.png",
         ],
-        url: "https://employee-management.bimberman.com",
+        url: "https://employee-management.benimberman.com",
         featured: true,
         featuredOrder: 2,
         order: 1,

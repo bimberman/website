@@ -9,7 +9,7 @@ const Navbar = () => {
   useTheme();
 
   const navItems = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: "/home" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
     { name: "Contact", href: "/contact" },
@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-full shadow-lg border border-gray-200/50 dark:border-gray-800/50 z-[100]">
       <header className="flex justify-between items-center h-16 px-6">
         <figure className="w-10">
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/home" onClick={() => setIsMenuOpen(false)}>
             <img
               src="/images/headshot.jpg"
               alt="Ben"
